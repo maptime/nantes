@@ -12,10 +12,10 @@ layout: default
     {{item.content}}
     <div class='keyline-all round pad2 col12 clearfix'>
       <div class='col8 pad0y'>
-        Join us: <span class='quiet'>{{item.date | date:"%A, %b %d %Y"}}</span>
+        Rejoignez-nous: <span class='quiet'>{{ item.date | date: "%-d" }} {% include mois.html page=item %} {{ item.date | date: "%Y" }}</span>
       </div>
       <div class='col4'>
-        <a class='button fill-orange block' href='{{item.rsvp}}'>RSVP</a>
+        <a class='button fill-orange block' href='{{item.rsvp}}'>Inscrivez-vous</a>
       </div>
     </div>
 
@@ -24,7 +24,7 @@ layout: default
     <h2><a href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></h2>
     {{item.content}}
     <div class='pad1y keyline-top'>
-      <strong class='quiet small block space-bottom1'>Posted {{item.date | date:"%b %d %Y"}} by {{item.author}}</strong>
+      <strong class='quiet small block space-bottom1'>Posté le {{ item.date | date: "%-d" }} {% include mois.html page=item %} {{ item.date | date: "%Y" }} par {{item.author}}</strong>
     </div>
 
   {% endif %}

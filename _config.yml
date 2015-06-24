@@ -5,6 +5,7 @@ paginate: 5
 repo: nantes
 github_org: maptime
 maptime:
-  chapter: MaptimeNantes
+  chapter: Maptime Nantes
   twitter: MaptimeNantes
+  twitterwordseparator: sur
   #disqus: YOUR DISQUS USERNAME

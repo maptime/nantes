@@ -27,9 +27,22 @@
 </head>
 <body>
   <div class='masthead fill-blue'>
-    <div class='fill-darken0 pad1y strong dark'>
+    <div class='fill-darken0 strong dark'>
       <div class='limiter'>
-        <a href='http://maptime.io/'>maptime.io</a>
+        <!-- <a href='http://maptime.io/'>maptime.io</a> -->
+          <div class="navbar">
+            <nav id="nav">
+              <ul class="menu" id="menu-main">
+                <li><a href="{{site.baseurl}}/">Accueil</a></li>
+                {% for weight in (1..10) %}{% for p in site.pages %}{% if p.weight == weight %}
+                  <li class="{% if p.url == page.url %}active{% endif %}"><a href="{{site.baseurl}}{{ p.url }}">{{ p.title }}</a></li>
+                {% endif %}{% endfor %}{% endfor %}
+                <!-- <li><a href="{{site.baseurl}}/about/">A propos</a></li> -->
+                <!-- <li><a href="{{site.baseurl}}/contact/">Contact</a></li> -->
+                <li><a href='http://maptime.io/'>maptime.io</a></li>
+              </ul>
+            </nav>
+        </div>
       </div>
     </div>
   </div>
@@ -43,7 +56,7 @@
             <span class='sprite marker'></span>
           </div>
           <a href='https://twitter.com/{{site.maptime.twitter}}/' class='contain z1 fill-blue button'>
-            @{{site.maptime.twitter}} on Twitter
+            @{{site.maptime.twitter}} {{site.maptime.twitterwordseparator}} Twitter
           </a>
         </div>
       </div>
@@ -53,21 +66,21 @@
     <div class='col12 clearfix'>
       <aside class='col3 fr space-bottom2 sidebar'>
         <div class='fill-purple strong dark round pad2 space-bottom2'>
-          <h3>The next {{site.maptime.chapter}} is:</h3>
+          <h3>Le prochain {{site.maptime.chapter}} est:</h3>
           <div id='rsvpdate'></div>
         </div>
 
         <div class='hide-mobile'>
           <div class='popup-group'>
-            <a href='https://github.com/{{site.github_org}}/{{site.repo}}/' class='col12 space-bottom2 button'>Watch these events</a>
+            <a href='https://github.com/{{site.github_org}}/{{site.repo}}/' class='col12 space-bottom2 button'>Regardez ces événements</a>
             <div class='popup popup-big keyline-all pad1 small round'>
               <ol class='space-bottom1'>
-                <li>1. Click the <strong>Watch these events</strong> button.</li>
-                <li>2. Login to GitHub or signup for an account.</li>
-                <li>3. Click the <strong>Watch</strong> button on the repo.</li>
+                <li>1. Cliquez sur le bouton <strong>Regardez ces événements</strong>.</li>
+                <li>2. Connectez-vous à Github ou enregistrez un compte.</li>
+                <li>3. Cliquez sur le bouton <strong>Watch</strong> du dépôt.</li>
               </ol>
               <div class='center'>
-                <img src='{{site.baseurl}}/img/watchrepo.png' alt='Watch repo' />
+                <img src='{{site.baseurl}}/img/watchrepo.png' alt='Regardez le dépôt' />
               </div>
             </div>
           </div>
@@ -75,7 +88,7 @@
           <div class='followers'></div>
           <div class='center'>
             <div class='pad0y space-bottom2'>
-              <a class='small' href='https://github.com/{{site.github_org}}/{{site.repo}}/watchers'>View all</a>
+              <a class='small' href='https://github.com/{{site.github_org}}/{{site.repo}}/watchers'>Voir tous</a>
             </div>
           </div>
         </div>
@@ -89,7 +102,7 @@
 
   <footer class='fill-light pad2y'>
     <div class='limiter center small quiet'>
-      <p>This website is <a href='http://github.com/{{site.github_org}}/{{site.repo}}/'>open source</a> and you can improve it. Learn more about contributing <a href='https://guides.github.com/activities/forking/'>here</a>.</p>
+      <p>Ce site web est <a href='http://github.com/{{site.github_org}}/{{site.repo}}/'>open source</a> et vous pouvez l'améliorez. Apprenez en plus pour contribuer <a href='https://guides.github.com/activities/forking/'>sur ce lien</a> (en).</p>
    </div>
   </footer>
 
@@ -100,16 +113,16 @@
   var rsvp = document.getElementById('rsvpdate');
   var date,formatted,link;
   '{% for item in site.categories.event limit:1 %}'
-    date = '{{item.date | date:"%Y/%-m/%-d"}}';
-    formatted = '{{item.date | date:"%A, %b %d %Y"}}';
+    date = '{{item.date | date:"%Y,%-m,%-d"}}';
+    formatted = '{{ item.date | date: "%-d" }} {% include mois.html page=item %} {{ item.date | date: "%Y" }}';
     link = '{{item.rsvp}}';
   '{% endfor %}'
 
   if (date && new Date().getTime() <= new Date(date).getTime() + (24 * 60 * 60 * 1000)) {
     rsvp.innerHTML = '<h3>' + formatted + '</h3>' +
-    '<a class="button fill-orange block" href=' + link + '>RSVP</a>';
+    '<a class="button fill-orange block" href=' + link + '>Inscrivez-vous</a>';
   } else {
-    rsvp.innerHTML = '<h3>TBA</h3>';
+    rsvp.innerHTML = '<h3><i>A venir prochainement</h3>';
   }
 </script>
 
