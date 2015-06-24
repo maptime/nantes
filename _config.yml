@@ -1,10 +1,10 @@
-baseurl: /starter
+baseurl: /nantes
 permalink: pretty
 markdown: kramdown
 paginate: 5
-repo: starter
+repo: nantes
 github_org: maptime
 maptime:
-  chapter: Meetup name
-  twitter: YourName
+  chapter: MaptimeNantes
+  twitter: MaptimeNantes
   #disqus: YOUR DISQUS USERNAME
